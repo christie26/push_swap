@@ -23,8 +23,11 @@ void	pa(t_queue *a, t_queue *b);
 void	pb(t_queue *a, t_queue *b);
 void	ra(t_queue *queue);
 void	rb(t_queue *queue);
+void	rra(t_queue *queue);
+void	rrb(t_queue *queue);
 int		de_queue(t_queue *queue);
 void	en_queue(t_queue *queue, int element, int flag);
 void	print_queue(t_queue a, t_queue b);
+void	biggest(t_queue *a);
 
 #endif

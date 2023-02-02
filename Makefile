@@ -4,6 +4,8 @@ SRC			= 	main.c \
 				push.c \
 				swap.c \
 				rotate.c \
+				rev_rotate.c \
+				biggest.c \
 				operations.c
 SRC			:= $(addprefix $(SRCDIR)/, $(SRC))
 OBJ			= ${SRC:.c=.o}

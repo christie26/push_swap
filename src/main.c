@@ -66,26 +66,37 @@ t_queue	*get_queue(int ac, char **av)
 	return (a);
 }
 
-int	main(int ac, char **av)
+t_queue	*init_b(int size)
 {
-	t_queue	*a;
-	t_queue	*b;
 	int		*array;
+	t_queue	*b;
 
-	if (ac == 1)
-		return (EXIT_FAILURE);
-	a = get_queue(ac, av);
-	array = (int *)malloc(sizeof(int) * a->size);
+	array = (int *)malloc(sizeof(int) * size);
 	b = ft_calloc(sizeof(t_queue), 1);
 	b->items = array;
 	b->front = -1;
 	b->rear = -1;
-	b->size = a->size;
+	b->size = size;
+	return (b);
+}
+
+int	main(int ac, char **av)
+{
+	t_queue	*a;
+	t_queue	*b;
+
+	if (ac == 1)
+		return (EXIT_FAILURE);
+	a = get_queue(ac, av);
+	b = init_b(a->size);
+	biggest(a);
+	(void)b;
+/*
+//	test to check operations	
 	print_queue(*a, *b);
 	sa(a);
 	print_queue(*a, *b);
 	printf("\n");
-
 	pb(a, b);
 	print_queue(*a, *b);
 	printf("\n");
@@ -100,4 +111,8 @@ int	main(int ac, char **av)
 
 	ra(a);
 	print_queue(*a, *b);
+	printf("\n");
+	rra(a);
+	print_queue(*a, *b);
+*/
 }

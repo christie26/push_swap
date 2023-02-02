@@ -52,6 +52,7 @@ void	print_queue(t_queue a, t_queue b)
 	i = 0;
 	sta = ' ';
 	stb = ' ';
+	printf("----------------\n");
 	while (i < a.size)
 	{
 		if (i == a.front)
@@ -62,10 +63,11 @@ void	print_queue(t_queue a, t_queue b)
 			sta = 'r';
 		if (i == b.rear)
 			stb = 'r';
-		printf("%d %c %d| %c %d\n", i, sta, a.items[i], stb, b.items[i]);
+		printf("%2d %c %2d| %c %2d  |\n", i, sta, a.items[i], stb, b.items[i]);
 		sta = ' ';
 		stb = ' ';
 		i++;
 	}
-	printf("    a |   b\n");
+	printf(" i    a|    b  |\n");
+	printf("----------------\n");
 }
