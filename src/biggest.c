@@ -47,5 +47,6 @@ void	biggest(t_queue	*a)
 	}
 	printf("result of biggest\n");
 	for(int i=0; i < size; i++)
-		printf("items[%d]=%d, %d\n",i, array[i],big[i]);	
+		printf("items[%d]=%d, %d\n",i, array[i],big[i]);
+	
 }

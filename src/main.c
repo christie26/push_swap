@@ -1,5 +1,5 @@
 #include "push_swap.h"
-#include "../libft/libft.h"
+#include "../libft/src/libft.h"
 
 int	get_size(int ac, char **av)
 {
@@ -30,8 +30,13 @@ int	*parsing(int ac, char **av, int size)
 	char	**tab;
 	char	**tmp;
 	int		i;
+	t_list	*head;
 
 	items = (int *)malloc(sizeof(int) * size);
+//	int *u = malloc(sizeof(int));
+//	*u = 3;
+//	head = ft_lstnew(u);
+	head = NULL;
 	i = 1;
 	while (i < ac)
 	{
@@ -39,7 +44,15 @@ int	*parsing(int ac, char **av, int size)
 		tmp = tab;
 		while (*tab)
 		{
+			if (check_int(*tab))
+				exit (1);
 			*items = ft_atoi(*tab);
+			printf("\n*items=%d\n", *items);
+			if (check_over(*items, &head))
+			{
+				printf("same element\n");
+				exit (1);
+			}
 			items++;
 			tab++;
 		}
@@ -87,6 +100,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
+	
 	a = get_queue(ac, av);
 	b = init_b(a->size);
 	biggest(a);
