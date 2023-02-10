@@ -8,7 +8,9 @@ SRC			= 	main.c \
 				rotate.c \
 				rev_rotate.c \
 				biggest.c \
+				move_to_b.c \
 				operations.c
+
 SRC			:= $(addprefix $(SRCDIR)/, $(SRC))
 OBJ			= ${SRC:.c=.o}
 

@@ -2,6 +2,7 @@
 
 void	en_queue(t_queue *queue, int element, int flag)
 {
+//	printf("front -> %d, rear -> %d\n", queue->front, queue->rear);
 	if ((queue->front == queue->rear + 1) || \
 		(queue->front == 0 && queue->rear == queue->size - 1))
 	{
@@ -13,6 +14,8 @@ void	en_queue(t_queue *queue, int element, int flag)
 		queue->front = 0;
 		queue->rear = 0;
 	}
+	else if (queue->front == 0 && queue->rear == 0)
+		queue->front = queue->size - 1;
 	else
 	{
 		if (flag == FRONT)

@@ -39,7 +39,7 @@ int	*alloc_index(int *array, int size, int i, int max_idx)
 	return (big);
 }
 
-void	biggest(t_queue	*a)
+int	*biggest(t_queue	*a)
 {
 	int	*array;
 	int	*big;
@@ -60,7 +60,5 @@ void	biggest(t_queue	*a)
 				big[i] = 0;
 		}
 	}
-	printf("result of biggest\n");
-	for (int i = 0; i < size; i++)
-		printf ("items[%d]=%d, %d\n", i, array[i], big[i]);
+	return (big);
 }
