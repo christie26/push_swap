@@ -1,4 +1,3 @@
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -31,6 +30,7 @@ int		de_queue(t_queue *queue);
 void	en_queue(t_queue *queue, int element, int flag);
 void	print_queue(t_queue a, t_queue b);
 void	biggest(t_queue *a);
+int		*parse_av(int ac, char **av, int size);
 int		check_int(char *str);
 int		check_over(int num, t_list **lst_ptr);
 

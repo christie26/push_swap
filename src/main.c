@@ -24,45 +24,6 @@ int	get_size(int ac, char **av)
 	return (cnt);
 }
 
-int	*parsing(int ac, char **av, int size)
-{
-	int		*items;
-	char	**tab;
-	char	**tmp;
-	int		i;
-	t_list	*head;
-
-	items = (int *)malloc(sizeof(int) * size);
-//	int *u = malloc(sizeof(int));
-//	*u = 3;
-//	head = ft_lstnew(u);
-	head = NULL;
-	i = 1;
-	while (i < ac)
-	{
-		tab = ft_split(av[i], ' ');
-		tmp = tab;
-		while (*tab)
-		{
-			if (check_int(*tab))
-				exit (1);
-			*items = ft_atoi(*tab);
-			printf("\n*items=%d\n", *items);
-			if (check_over(*items, &head))
-			{
-				printf("same element\n");
-				exit (1);
-			}
-			items++;
-			tab++;
-		}
-		free(tmp);
-		i++;
-	}
-	items -= size;
-	return (items);
-}
-
 t_queue	*get_queue(int ac, char **av)
 {
 	int		size;
@@ -70,7 +31,7 @@ t_queue	*get_queue(int ac, char **av)
 	t_queue	*a;
 
 	size = get_size(ac, av);
-	items = parsing(ac, av, size);
+	items = parse_av(ac, av, size);
 	a = ft_calloc(1, sizeof(t_queue));
 	a->size = size;
 	a->front = 0;
@@ -100,7 +61,6 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
-	
 	a = get_queue(ac, av);
 	b = init_b(a->size);
 	biggest(a);

@@ -1,7 +1,8 @@
 
 SRCDIR		= ./src
 SRC			= 	main.c \
-				parsing.c \
+				parse.c \
+				parse_utils.c \
 				push.c \
 				swap.c \
 				rotate.c \

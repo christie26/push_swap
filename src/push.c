@@ -3,7 +3,7 @@
 void	push(t_queue *src, t_queue *dst)
 {
 	int	element;
-	
+
 	element = de_queue(src);
 	en_queue(dst, element, FRONT);
 }
