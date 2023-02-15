@@ -9,6 +9,7 @@ SRC			= 	main.c \
 				rev_rotate.c \
 				biggest.c \
 				move_to_b.c \
+				back_to_a.c \
 				operations.c
 
 SRC			:= $(addprefix $(SRCDIR)/, $(SRC))

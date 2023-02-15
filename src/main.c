@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 12:43:33 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:07:11 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 	big = biggest(a);
 	move_to_b(a, b, big);
 	print_queue(*a, *b);
-//	back_to_a(a, b, big);
+	back_to_a(a, b);
 /*
 	printf("result of biggest\n");
 	for (int i = 0; i < a->size; i++)

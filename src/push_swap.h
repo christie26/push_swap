@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 12:57:24 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:07:08 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ int		*parse_av(int ac, char **av, int size);
 int		check_int(char *str);
 int		check_over(int num, t_list **lst_ptr);
 void	move_to_b(t_queue *a, t_queue *b, int *big);
-
+void	back_to_a(t_queue *a, t_queue*b);
 #endif

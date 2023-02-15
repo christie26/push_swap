@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:38 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 12:43:40 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:53:21 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	print_queue(t_queue a, t_queue b)
 		stb = ' ';
 		i++;
 	}
+	printf("----------------\n");
 	printf(" i    a|    b  |\n");
 	printf("----------------\n");
 }

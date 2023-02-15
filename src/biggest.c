@@ -6,46 +6,46 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:24 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 12:43:27 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:51:32 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_index(int i, int size, int cmp, int *big)
+int	check_index(int i, int size, int group, int *big)
 {
 	while (i < size)
 	{
-		if (big[i] == cmp)
+		if (big[i] == group)
 			return (i);
 		i++;
 	}
 	return (0);
 }
 
-int	*alloc_index(int *array, int size, int i, int max_idx)
+int	*alloc_index(int *array, int size, int i, int *max_group)
 {
 	int	j;
-	int	cmp;
+	int	group;
 	int	*big;
 
 	big = (int *)malloc(sizeof(int) * size);
 	big[size - 1] = 1;
 	while (i--)
 	{
-		cmp = max_idx + 1;
-		while (--cmp)
+		group = *max_group + 1;
+		while (--group)
 		{
-			j = check_index(i, size, cmp, big);
+			j = check_index(i, size, group, big);
 			if (array[i] < array[j])
 			{
-				big[i] = cmp + 1;
-				if (big[i] > max_idx)
-					max_idx = big[i];
+				big[i] = group + 1;
+				if (big[i] > *max_group)
+					*max_group = big[i];
 				break ;
 			}
 		}
-		if (cmp == 0)
+		if (group == 0)
 			big[i] = 1;
 	}
 	return (big);
@@ -57,20 +57,19 @@ int	*biggest(t_queue	*a)
 	int	*big;
 	int	size;
 	int	i;
-	int	j;
+	int	max_group;
 
+	max_group = 1;
 	array = a->items;
 	size = a->size;
-	big = alloc_index(array, size, size - 1, 1);
-	i = size;
-	while (--i)
+	big = alloc_index(array, size, size - 1, &max_group);
+	i = -1;
+	while (i++ < size)
 	{
-		j = i;
-		while (--j)
-		{
-			if (big[i] == big[j])
-				big[i] = 0;
-		}
+		if (big[i] != max_group)
+			big[i] = 0;
+		else
+			max_group--;
 	}
 	return (big);
 }
