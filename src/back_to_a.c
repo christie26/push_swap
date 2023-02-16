@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:42:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/16 16:00:27 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:47:10 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ int	find_move(int idx, t_queue *queue)
 	{
 		reverse += queue->size;
 	}
+//	printf("find_move\nrotate = %d, reverse = %d idx = %d\n", rotate, reverse, idx);
 	if (rotate < reverse)
 		return (rotate);
 	else
 		return (reverse);
 }
 
-void	push_best(int idx, t_queue *b)
+void	rotate_b(int idx, t_queue *b)
 {
 	int	rotate;
 	int	reverse;
@@ -44,7 +45,7 @@ void	push_best(int idx, t_queue *b)
 	{
 		reverse += b->size;
 	}
-	printf("rotate = %d, reverse = %d idx = %d\n", rotate, reverse, idx);
+	printf("push\nrotate = %d, reverse = %d idx = %d\n", rotate, reverse, idx);
 	if (rotate < reverse)
 	{
 		while (rotate--)
@@ -80,7 +81,7 @@ int	find_move_a(int	element_b, t_queue *a)
 		element++;
 	}
 	printf("put smallest on the top\n");
-	return (-1);
+	return (find_move(a->min_idx, a));
 }
 
 void	back_to_a(t_queue *a, t_queue *b)
@@ -118,7 +119,8 @@ void	back_to_a(t_queue *a, t_queue *b)
 			move_min = move;
 		}
 		printf("move_min = %d, idx_b = %d\n", move_min, idx_b);
-		push_best(idx_b, b);
+		rotate_b(idx_b, b);
+	//	rotate_a();
 		pa(a, b);
 		print_queue(*a, *b);
 	//	break ; // for test

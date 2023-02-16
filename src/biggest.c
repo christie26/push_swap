@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:24 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/16 14:42:09 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:40:50 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,21 @@ int	*alloc_index(int *array, int size, int i, int *max_group)
 	return (big);
 }
 
+int	minimum_value_index(int *big, int max_group, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		if (big[i] == max_group)
+			return (i);
+		i++;
+	}
+	printf("Error ! wrong with biggest\n");
+	return (-1);
+}
+
 int	*biggest(t_queue	*a)
 {
 	int	*array;
@@ -63,6 +78,7 @@ int	*biggest(t_queue	*a)
 	array = a->items;
 	size = a->size;
 	big = alloc_index(array, size, size - 1, &max_group);
+	a->min_idx = minimum_value_index(big, max_group, size);
 	i = -1;
 	while (i++ < size)
 	{
