@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:38 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 18:53:21 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:53:49 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	en_queue(t_queue *queue, int element, int flag)
 {
-//	printf("front -> %d, rear -> %d\n", queue->front, queue->rear);
 	if ((queue->front == queue->rear + 1) || \
 		(queue->front == 0 && queue->rear == queue->size - 1))
 	{
@@ -26,12 +25,15 @@ void	en_queue(t_queue *queue, int element, int flag)
 		queue->front = 0;
 		queue->rear = 0;
 	}
-	else if (queue->front == 0 && queue->rear == 0)
-		queue->front = queue->size - 1;
 	else
 	{
 		if (flag == FRONT)
-			queue->front = (queue->front - 1) % queue->size;
+		{
+			if (queue->front == 0)
+				queue->front = queue->size - 1;
+			else
+				queue->front = (queue->front - 1) % queue->size;
+		}
 		else
 			queue->rear = (queue->rear + 1) % queue->size;
 	}
@@ -39,7 +41,6 @@ void	en_queue(t_queue *queue, int element, int flag)
 		queue->items[queue->front] = element;
 	else
 		queue->items[queue->rear] = element;
-//	printf("Insert -> %d\n", element);
 }
 
 int	de_queue(t_queue *queue)

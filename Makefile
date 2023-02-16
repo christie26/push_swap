@@ -25,10 +25,10 @@ RM			= rm -f
 
 all:		${NAME}
 
-%.o: 		%.c $(DYLIB)
+%.o: 		%.c
 			$(CC) $(CFLAGS) -Ilibft -c $< -o $@
 
-$(NAME): 	$(OBJ) $(DYLIB) $(LIBFT)
+$(NAME): 	$(OBJ) $(LIBFT)
 			$(CC) $(OBJ) -L./libft -lft -o $(NAME) 
 
 $(LIBFT):

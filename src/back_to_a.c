@@ -6,25 +6,57 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:42:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 19:37:33 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:00:27 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_move_b(int idx, t_queue *b)
+int	find_move(int idx, t_queue *queue)
 {
-	if (idx > b->front)
-		return (idx - b->front);
+	int	rotate;
+	int	reverse;
+
+	rotate = idx - queue->front;
+	if (rotate < 0)
+		rotate += queue->size;
+	reverse = queue->rear - idx + 1;
+	if (reverse < 0)
+	{
+		reverse += queue->size;
+	}
+	if (rotate < reverse)
+		return (rotate);
 	else
-		return (idx - b->front + b->size);
-	/*
-	   move = idx - b->front;
-	   if (move < 0)
-	   move += b->size;
-	   return (move);
-	   */
+		return (reverse);
 }
+
+void	push_best(int idx, t_queue *b)
+{
+	int	rotate;
+	int	reverse;
+
+	rotate = idx - b->front;
+	if (rotate < 0)
+		rotate += b->size;
+	reverse = b->rear - idx + 1;
+	if (reverse < 0)
+	{
+		reverse += b->size;
+	}
+	printf("rotate = %d, reverse = %d idx = %d\n", rotate, reverse, idx);
+	if (rotate < reverse)
+	{
+		while (rotate--)
+			rb(b);
+	}
+	else
+	{
+		while (reverse--)
+			rrb(b);
+	}
+}
+
 int	find_move_a(int	element_b, t_queue *a)
 {
 	int	i;
@@ -40,35 +72,20 @@ int	find_move_a(int	element_b, t_queue *a)
 		while (i != a->rear)
 		{
 			if (a->items[i] == element)
-				return (find_move_b(i, a));
+				return (find_move(i, a));
 			i = (i + 1) % a->size;
 		}
+		if (a->items[i] == element)
+			return (find_move(i, a));
 		element++;
 	}
 	printf("put smallest on the top\n");
 	return (-1);
 }
-void	move_b(t_queue *b, int idx_b)
-{
-	int	move;
-
-	move = idx_b - b->front;
-	if (move)
-	{
-		while (move--)
-			rb(b);
-	}
-	else
-	{
-		move += b->size;
-		while (move--)
-			rrb(b);
-	}
-}
 
 void	back_to_a(t_queue *a, t_queue *b)
 {
-	int tmp_b;
+	int	tmp_b;
 	int	idx_b;
 	int	move;
 	int move_min;
@@ -76,29 +93,24 @@ void	back_to_a(t_queue *a, t_queue *b)
 	while (b->front != -1)
 	{
 		tmp_b = b->front;
-		move_min = 0;
 		while (tmp_b != b->rear)
 		{
-			printf("tmp_b = %d \n", tmp_b);
-			move = find_move_b(tmp_b, b);
-			printf("check\n");
+			move = find_move(tmp_b, b);
 			move += find_move_a(b->items[tmp_b], a);
-			printf("check\n");
-			if (move < move_min)
+			if (tmp_b == b->front)
+			{
+				printf("b->front = %d\n", b->front);
+				move_min = move;
+				idx_b = tmp_b;
+			}
+			else if (move < move_min)
 			{
 				idx_b = tmp_b;
 				move_min = move;
 			}
-			//	if (tmp_b == b->rear)
-			//	{
-			//		printf("rear\n");
-			//		break ;
-			//	}
-			tmp_b = (tmp_b + 1) % b->size ;
-			printf("tmp_b -> %d\n", tmp_b);
+			tmp_b = (tmp_b + 1) % b->size;
 		}
-		printf("* tmp_b = %d \n", tmp_b);
-		move = find_move_b(tmp_b, b);
+		move = find_move(tmp_b, b);
 		move += find_move_a(b->items[tmp_b], a);
 		if (move < move_min)
 		{
@@ -106,8 +118,9 @@ void	back_to_a(t_queue *a, t_queue *b)
 			move_min = move;
 		}
 		printf("move_min = %d, idx_b = %d\n", move_min, idx_b);
-		//	move_b(b, idx_b);
-		//	print_queue(*a, *b);
-		break ;
+		push_best(idx_b, b);
+		pa(a, b);
+		print_queue(*a, *b);
+	//	break ; // for test
 	}
 }

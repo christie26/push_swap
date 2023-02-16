@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:41 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 12:43:43 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:05:52 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	*parse_av(int ac, char **av, int size)
 	int		*items;
 	char	**tab;
 	int		i;
+	int		cnt;
 	t_list	*head;
 
 	items = (int *)malloc(sizeof(int) * size);
@@ -69,17 +70,17 @@ int	*parse_av(int ac, char **av, int size)
 	while (++i < ac)
 	{
 		tab = ft_split(av[i], ' ');
+		cnt = 0;
 		while (*tab)
 		{
-			if (check_int(*tab))
-				exit (1);
 			*items = ft_atoi(*tab);
-			if (check_over(*items, &head))
+			if (check_over(*items, &head) || check_int(*tab))
 				exit (1);
 			items++;
 			tab++;
+			cnt++;
 		}
-		free(tab - size);
+		free(tab - cnt);
 	}
 	return (items - size);
 }
@@ -94,11 +95,12 @@ int	get_size(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		cnt++;
 		j = 0;
+		if (av[i][j++] != ' ')
+			cnt++;
 		while (av[i][j])
 		{
-			if (av[i][j] == ' ')
+			if (av[i][j] != ' ' && av[i][j - 1] == ' ')
 				cnt++;
 			j++;
 		}

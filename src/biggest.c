@@ -6,13 +6,13 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:24 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 18:51:32 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:42:09 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_index(int i, int size, int group, int *big)
+int	find_leader(int i, int size, int group, int *big)
 {
 	while (i < size)
 	{
@@ -36,7 +36,7 @@ int	*alloc_index(int *array, int size, int i, int *max_group)
 		group = *max_group + 1;
 		while (--group)
 		{
-			j = check_index(i, size, group, big);
+			j = find_leader(i, size, group, big);
 			if (array[i] < array[j])
 			{
 				big[i] = group + 1;
