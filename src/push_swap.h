@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/17 15:10:37 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:45:36 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_queue {
 	int	size;
 	int	front;
 	int	rear;
+	int	max;
 	int	min_idx;
 	int	*items;
 }	t_queue;

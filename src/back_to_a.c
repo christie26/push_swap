@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:42:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/17 15:35:42 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:50:41 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void	rotate_a(int element_b, t_queue *a)
 {
 	int	i;
 	int	element;
-	int	num_a;
 
-	num_a = oversize(a->rear - a->front + 1, a->size);
 	element = element_b + 1;
-	while (num_a--)
+	while (element < a->items[a->max] + 1)
 	{
 		i = a->front;
 		while (1)
@@ -88,8 +86,6 @@ void	rotate_a(int element_b, t_queue *a)
 		}
 		element++;
 	}
-//	if (i == a->min_idx)
-//		a->min_idx = a->front;
 	rotate_center(a->min_idx, a, 1);
 	return ;
 }
@@ -98,11 +94,9 @@ int	count_move_a(int element_b, t_queue *a)
 {
 	int	i;
 	int	element;
-	int	num_a;
 
-	num_a = oversize(a->rear - a->front + 1, a->size);
 	element = element_b + 1;
-	while (num_a--)
+	while (element < a->items[a->max] + 1)
 	{
 		i = a->front;
 		while (1)
@@ -122,18 +116,23 @@ void	update_min(t_queue *a)
 {
 	int	i;
 	int	min;
+	int	max;
 
 	i = a->front;
 	min = a->front;
+	max = a->front;
 	while (1)
 	{
 		if (a->items[min] > a->items[i])
 			min = i;
+		else if (a->items[max] < a->items[i])
+			max = i;
 		if (i == a->rear)
 			break;
 		i = (i + 1) % a->size;
 	}
 	a->min_idx = min;
+	a->max = max;
 	return ;
 }
 
@@ -144,6 +143,7 @@ void	back_to_a(t_queue *a, t_queue *b)
 	int	move;
 	int	move_min;
 
+	update_min(a);
 	while (b->front != -1)
 	{
 		tmp_b = b->front;
