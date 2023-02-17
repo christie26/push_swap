@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:42:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/17 12:13:03 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:35:42 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,21 @@ void	rotate_a(int element_b, t_queue *a)
 	while (num_a--)
 	{
 		i = a->front;
-		while (i != a->rear)
+		while (1)
 		{
 			if (a->items[i] == element)
 			{
-				if (i == a->min_idx)
-					a->min_idx = oversize(a->min_idx - 1, a->size);
 				rotate_center(i, a, 1);
 				return ;
 			}
+			if (i == a->rear)
+				break ;
 			i = (i + 1) % a->size;
-		}
-		if (a->items[i] == element)
-		{
-			if (i == a->min_idx)
-				a->min_idx = oversize(a->min_idx - 1, a->size);
-			rotate_center(i, a, 1);
-			return ;
 		}
 		element++;
 	}
+//	if (i == a->min_idx)
+//		a->min_idx = a->front;
 	rotate_center(a->min_idx, a, 1);
 	return ;
 }
@@ -110,17 +105,36 @@ int	count_move_a(int element_b, t_queue *a)
 	while (num_a--)
 	{
 		i = a->front;
-		while (i != a->rear)
+		while (1)
 		{
 			if (a->items[i] == element)
 				return (count_move(i, a));
+			if (i == a->rear)
+				break ;
 			i = (i + 1) % a->size;
 		}
-		if (a->items[i] == element)
-			return (count_move(i, a));
 		element++;
 	}
 	return (count_move(a->min_idx, a));
+}
+
+void	update_min(t_queue *a)
+{
+	int	i;
+	int	min;
+
+	i = a->front;
+	min = a->front;
+	while (1)
+	{
+		if (a->items[min] > a->items[i])
+			min = i;
+		if (i == a->rear)
+			break;
+		i = (i + 1) % a->size;
+	}
+	a->min_idx = min;
+	return ;
 }
 
 void	back_to_a(t_queue *a, t_queue *b)
@@ -133,31 +147,24 @@ void	back_to_a(t_queue *a, t_queue *b)
 	while (b->front != -1)
 	{
 		tmp_b = b->front;
-		while (tmp_b != b->rear)
+		move_min = 2 * a->size;
+		idx_b = tmp_b;
+		while (1)
 		{
 			move = count_move(tmp_b, b);
 			move += count_move_a(b->items[tmp_b], a);
-			if (tmp_b == b->front)
-			{
-				move_min = move;
-				idx_b = tmp_b;
-			}
-			else if (move < move_min)
+			if (move < move_min)
 			{
 				idx_b = tmp_b;
 				move_min = move;
 			}
+			if (tmp_b == b->rear)
+				break ;
 			tmp_b = (tmp_b + 1) % b->size;
-		}
-		move = count_move(tmp_b, b);
-		move += count_move_a(b->items[tmp_b], a);
-		if (move < move_min)
-		{
-			idx_b = tmp_b;
-			move_min = move;
 		}
 		rotate_center(idx_b, b, 2);
 		rotate_a(b->items[idx_b], a);
 		pa(a, b);
+		update_min(a);
 	}
 }

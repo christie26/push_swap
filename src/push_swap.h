@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/16 16:47:11 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:10:37 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ int		check_int(char *str);
 int		check_over(int num, t_list **lst_ptr);
 void	move_to_b(t_queue *a, t_queue *b, int *big);
 void	back_to_a(t_queue *a, t_queue*b);
+void	rotate_center(int idx, t_queue *queue, int flag);
+
 #endif
