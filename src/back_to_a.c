@@ -6,66 +6,71 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:42:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/16 16:47:10 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:13:03 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_move(int idx, t_queue *queue)
+int	oversize(int value, int size)
+{
+	if (value < 0)
+		return (value + size);
+	else
+		return (value);
+}
+
+int	count_move(int idx, t_queue *queue)
 {
 	int	rotate;
 	int	reverse;
 
-	rotate = idx - queue->front;
-	if (rotate < 0)
-		rotate += queue->size;
-	reverse = queue->rear - idx + 1;
-	if (reverse < 0)
-	{
-		reverse += queue->size;
-	}
-//	printf("find_move\nrotate = %d, reverse = %d idx = %d\n", rotate, reverse, idx);
+	rotate = oversize(idx - queue->front, queue->size);
+	reverse = oversize(queue->rear - idx + 1, queue->size);
 	if (rotate < reverse)
 		return (rotate);
 	else
 		return (reverse);
 }
 
-void	rotate_b(int idx, t_queue *b)
+void	rotate_center(int idx, t_queue *queue, int flag)
 {
 	int	rotate;
 	int	reverse;
 
-	rotate = idx - b->front;
-	if (rotate < 0)
-		rotate += b->size;
-	reverse = b->rear - idx + 1;
-	if (reverse < 0)
-	{
-		reverse += b->size;
-	}
-	printf("push\nrotate = %d, reverse = %d idx = %d\n", rotate, reverse, idx);
+	if (queue->front == queue->rear)
+		return ;
+	rotate = oversize(idx - queue->front, queue->size);
+	reverse = oversize(queue->rear - idx + 1, queue->size);
 	if (rotate < reverse)
 	{
 		while (rotate--)
-			rb(b);
+		{
+			if (flag == 1)
+				ra(queue);
+			else
+				rb(queue);
+		}
 	}
 	else
 	{
 		while (reverse--)
-			rrb(b);
+		{
+			if (flag == 1)
+				rra(queue);
+			else
+				rrb(queue);
+		}
 	}
 }
 
-int	find_move_a(int	element_b, t_queue *a)
+void	rotate_a(int element_b, t_queue *a)
 {
 	int	i;
 	int	element;
 	int	num_a;
 
-	num_a = a->rear - a->front + 1;
-
+	num_a = oversize(a->rear - a->front + 1, a->size);
 	element = element_b + 1;
 	while (num_a--)
 	{
@@ -73,15 +78,49 @@ int	find_move_a(int	element_b, t_queue *a)
 		while (i != a->rear)
 		{
 			if (a->items[i] == element)
-				return (find_move(i, a));
+			{
+				if (i == a->min_idx)
+					a->min_idx = oversize(a->min_idx - 1, a->size);
+				rotate_center(i, a, 1);
+				return ;
+			}
 			i = (i + 1) % a->size;
 		}
 		if (a->items[i] == element)
-			return (find_move(i, a));
+		{
+			if (i == a->min_idx)
+				a->min_idx = oversize(a->min_idx - 1, a->size);
+			rotate_center(i, a, 1);
+			return ;
+		}
 		element++;
 	}
-	printf("put smallest on the top\n");
-	return (find_move(a->min_idx, a));
+	rotate_center(a->min_idx, a, 1);
+	return ;
+}
+
+int	count_move_a(int element_b, t_queue *a)
+{
+	int	i;
+	int	element;
+	int	num_a;
+
+	num_a = oversize(a->rear - a->front + 1, a->size);
+	element = element_b + 1;
+	while (num_a--)
+	{
+		i = a->front;
+		while (i != a->rear)
+		{
+			if (a->items[i] == element)
+				return (count_move(i, a));
+			i = (i + 1) % a->size;
+		}
+		if (a->items[i] == element)
+			return (count_move(i, a));
+		element++;
+	}
+	return (count_move(a->min_idx, a));
 }
 
 void	back_to_a(t_queue *a, t_queue *b)
@@ -89,18 +128,17 @@ void	back_to_a(t_queue *a, t_queue *b)
 	int	tmp_b;
 	int	idx_b;
 	int	move;
-	int move_min;
+	int	move_min;
 
 	while (b->front != -1)
 	{
 		tmp_b = b->front;
 		while (tmp_b != b->rear)
 		{
-			move = find_move(tmp_b, b);
-			move += find_move_a(b->items[tmp_b], a);
+			move = count_move(tmp_b, b);
+			move += count_move_a(b->items[tmp_b], a);
 			if (tmp_b == b->front)
 			{
-				printf("b->front = %d\n", b->front);
 				move_min = move;
 				idx_b = tmp_b;
 			}
@@ -111,18 +149,15 @@ void	back_to_a(t_queue *a, t_queue *b)
 			}
 			tmp_b = (tmp_b + 1) % b->size;
 		}
-		move = find_move(tmp_b, b);
-		move += find_move_a(b->items[tmp_b], a);
+		move = count_move(tmp_b, b);
+		move += count_move_a(b->items[tmp_b], a);
 		if (move < move_min)
 		{
 			idx_b = tmp_b;
 			move_min = move;
 		}
-		printf("move_min = %d, idx_b = %d\n", move_min, idx_b);
-		rotate_b(idx_b, b);
-	//	rotate_a();
+		rotate_center(idx_b, b, 2);
+		rotate_a(b->items[idx_b], a);
 		pa(a, b);
-		print_queue(*a, *b);
-	//	break ; // for test
 	}
 }

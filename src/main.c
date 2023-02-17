@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/16 16:00:29 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:09:56 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,7 @@ int	main(int ac, char **av)
 	b = init_b(a->size);
 	big = biggest(a);
 	move_to_b(a, b, big);
-	printf("after push all biggest sorted array\n");
 	print_queue(*a, *b);
 	back_to_a(a, b);
-/*
-	printf("result of biggest\n");
-	for (int i = 0; i < a->size; i++)
-		printf ("items[%d]=%d, %d\n", i, a->items[i], big[i]);
-*/
-/*
-//	test to check operations	
 	print_queue(*a, *b);
-	sa(a);
-	print_queue(*a, *b);
-	printf("\n");
-	pb(a, b);
-	print_queue(*a, *b);
-	printf("\n");
-
-	pa(a, b);
-	print_queue(*a, *b);
-	printf("\n");
-
-	pa(a, b);
-	print_queue(*a, *b);
-	printf("\n");
-
-	ra(a);
-	print_queue(*a, *b);
-	printf("\n");
-	rra(a);
-	print_queue(*a, *b);
-*/
 }
