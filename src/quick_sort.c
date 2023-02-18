@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_to_b.c                                        :+:      :+:    :+:   */
+/*   quick_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 12:43:35 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/18 22:46:12 by yoonsele         ###   ########.fr       */
+/*   Created: 2023/02/18 22:36:17 by yoonsele          #+#    #+#             */
+/*   Updated: 2023/02/18 22:46:07 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	move_to_b(t_queue *a, t_queue *b, int *big)
+void	quick_sort(t_queue *a, int *big)
 {
+	int	max_group;
 	int	i;
+	int	size;
 
 	i = 0;
-	while (i < a->size)
-	{
-		if (big[i])
-			ra(a);
-		else
-			pb(a, b);
-	i++;
-	}
+	while (big[i] == 0)
+		i++;
+	max_group = big[i];
+//	printf("we have %d sorted array\n", max_group);
+	
+	(void)a;
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/17 15:45:36 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/18 22:40:44 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_queue	*get_queue(int ac, char **av);
 t_queue	*init_b(int size);
 void	print_queue(t_queue a, t_queue b);
 int		*biggest(t_queue *a);
+void	quick_sort(t_queue *a, int *big);
 int		*parse_av(int ac, char **av, int size);
 int		check_int(char *str);
 int		check_over(int num, t_list **lst_ptr);

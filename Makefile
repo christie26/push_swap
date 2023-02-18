@@ -3,14 +3,15 @@ SRCDIR		= ./src
 SRC			= 	main.c \
 				parse.c \
 				parse_utils.c \
-				push.c \
-				swap.c \
-				rotate.c \
-				rev_rotate.c \
+				cmd_push.c \
+				cmd_swap.c \
+				cmd_rotate.c \
+				cmd_reverse.c \
+				cmd_utils.c \
+				quick_sort.c \
 				biggest.c \
 				move_to_b.c \
-				back_to_a.c \
-				operations.c
+				back_to_a.c 
 
 SRC			:= $(addprefix $(SRCDIR)/, $(SRC))
 OBJ			= ${SRC:.c=.o}

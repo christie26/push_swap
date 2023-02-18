@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/17 16:50:36 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/18 22:46:14 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 		exit (SORTED_INPUT);
 	b = init_b(a->size);
 	big = biggest(a);
+	quick_sort(a, big);
 	move_to_b(a, b, big);
 	back_to_a(a, b);
 	rotate_center(a->min_idx, a, 1);
