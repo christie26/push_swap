@@ -33,6 +33,7 @@ int	main(int ac, char **av)
 	t_queue	*a;
 	t_queue	*b;
 	int		*big;
+	int		*pivot;
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
@@ -41,8 +42,8 @@ int	main(int ac, char **av)
 		exit (SORTED_INPUT);
 	b = init_b(a->size);
 	big = biggest(a);
-	quick_sort(a, big);
-	move_to_b(a, b, big);
+	pivot = quick_sort(a);
+	move_to_b(a, b, big, pivot);
 	back_to_a(a, b);
 	rotate_center(a->min_idx, a, 1);
 	print_queue(*a, *b);

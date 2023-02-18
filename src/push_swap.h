@@ -47,11 +47,11 @@ t_queue	*get_queue(int ac, char **av);
 t_queue	*init_b(int size);
 void	print_queue(t_queue a, t_queue b);
 int		*biggest(t_queue *a);
-void	quick_sort(t_queue *a, int *big);
+int		*quick_sort(t_queue *a);
 int		*parse_av(int ac, char **av, int size);
 int		check_int(char *str);
 int		check_over(int num, t_list **lst_ptr);
-void	move_to_b(t_queue *a, t_queue *b, int *big);
+void	move_to_b(t_queue *a, t_queue *b, int *big, int *pivot);
 void	back_to_a(t_queue *a, t_queue*b);
 void	rotate_center(int idx, t_queue *queue, int flag);
 

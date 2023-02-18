@@ -12,17 +12,33 @@
 
 #include "push_swap.h"
 
-void	move_to_b(t_queue *a, t_queue *b, int *big)
+void	move_to_b(t_queue *a, t_queue *b, int *big, int *pivot)
 {
 	int	i;
+	int	one;
+	int	two;
 
 	i = 0;
+	one = pivot[0];
+	(void)one;
+	two = pivot[1];
 	while (i < a->size)
 	{
 		if (big[i])
 			ra(a);
 		else
-			pb(a, b);
+		{
+		//	if (one < a->items[i] && a->items[i] < two)
+			if (a->items[i] < two)
+				pb(a, b);
+			else if (a->items[i] > two)
+			{
+				pb(a, b);
+				rb(b);
+			}
+			else
+				ra(a);
+		}
 	i++;
 	}
 }
