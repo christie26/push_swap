@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 10:28:21 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:31:46 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 	t_queue	*a;
 	t_queue	*b;
 	int		*big;
-	int		*pivot;
+	int		pivot;
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
@@ -45,5 +45,5 @@ int	main(int ac, char **av)
 	pivot = get_pivot(a);
 	move_to_b(a, b, big, pivot);
 	back_to_a(a, b);
-	rotate_center(a->min_idx, a, 1);
+	minimum_top(a->min_idx, a);
 }

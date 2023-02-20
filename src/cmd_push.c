@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   cmd_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/15 16:41:57 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:34:54 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	push(t_queue *src, t_queue *dst)
 	int	element;
 
 	element = de_queue(src);
-	en_queue(dst, element, FRONT);
+	en_queue(dst, element);
 }
 
 void	pa(t_queue *a, t_queue *b)

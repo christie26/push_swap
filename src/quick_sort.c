@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 22:36:17 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 10:52:10 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:00:19 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,33 @@ void	array_swap(int *a, int *b)
 	return ;
 }
 
-void	quick_sort(int *array, int start, int end)
+void	put_pivot_start(int *array, int start, int end)
 {
-	int	i;
-	int	j;
 	int	mid;
-	int	pivot;
 
-	i = start + 1;
-	j = end;
 	mid = start + (end - start) / 2;
-# if 1
 	if (array[mid] > array[end])
 		array_swap(array + mid, array + end);
 	if (array[mid] > array[start])
 		array_swap(array + mid, array + start);
 	if (array[end] < array[start])
 		array_swap(array + end, array + start);
-# else
-	if (array[start] > array[mid])
-		array_swap(array + start, array + mid);
-	if (array[start] > array[end])
-		array_swap(array + start, array + end);
-	if (array[mid] > array[end])
-		array_swap(array + mid, array + end);
-	array_swap(array + start, array + mid);
-# endif
-	pivot = array[start];
+	return ;
+}
+
+void	quick_sort(int *array, int start, int end)
+{
+	int	i;
+	int	j;
+
+	i = start + 1;
+	j = end;
+	put_pivot_start(array, start, end);
 	while (i < j)
 	{
-		while (pivot > array[i])
+		while (array[start] > array[i])
 			i++;
-		while (pivot < array[j])
+		while (array[start] < array[j])
 			j--;
 		if (i > j)
 		{
@@ -68,22 +63,20 @@ void	quick_sort(int *array, int start, int end)
 	quick_sort(array, j + 1, end);
 }
 
-int	*get_pivot(t_queue *a)
+int	get_pivot(t_queue *a)
 {
 	int	idx;
 	int	*array;
-	int	*pivot;
+	int	pivot;
 
 	array = (int *)malloc(sizeof(int) * a->size);
-	pivot = (int *)malloc(sizeof(int) * 2);
 	idx = -1;
 	while (idx < a->size)
-	{	
+	{
 		array[idx] = a->items[idx];
 		idx++;
 	}
 	quick_sort(array, 0, a->size - 1);
-	pivot[0] = array[a->size / 3];
-	pivot[1] = array[a->size / 3 * 2];
+	pivot = array[a->size / 2];
 	return (pivot);
 }
