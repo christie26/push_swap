@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 14:25:01 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:18:05 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,45 +36,34 @@ void	move_to_b(t_queue *a, t_queue *b, int *big, int pivot)
 	free(big);
 }
 
-int	check_sorted(t_queue *a)
+int	set_queue(t_queue *a, t_queue *b, int ac, char **av)
 {
-	int	i;
-	int	*items;
-
-	i = -1;
-	items = a->items;
-	while (i++ < a->size - 2)
-	{
-		if (items[i] > items[i + 1])
-			return (0);
-	}
-	return (1);
+	if (get_queue(ac, av, a))
+		return (1);
+	if (init_b(a->size, b))
+		return (1);
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_queue	*a;
-	t_queue	*b;
+	t_queue	a;
+	t_queue	b;
 	int		*big;
 	int		pivot;
 
 	if (ac == 1)
 		return (1);
-	a = get_queue(ac, av);
-	if (!a)
+	if (set_queue(&a, &b, ac, av))
 		exit (1);
-	if (check_sorted(a))
-		exit (SORTED_INPUT);
-	b = init_b(a->size);
-	if (!b)
-		exit (1);
-	if (upto_five(a, b))
+	if (upto_five(&a, &b))
 		return (0);
-	big = biggest(a);
+	big = (int *)malloc(sizeof(int) * a.size);
 	if (!big)
 		exit (1);
-	pivot = get_pivot(a);
-	move_to_b(a, b, big, pivot);
-	back_to_a(a, b);
-	minimum_top(a->min_idx, a);
+	biggest(&a, big);
+	pivot = get_pivot(&a);
+	move_to_b(&a, &b, big, pivot);
+	back_to_a(&a, &b);
+	minimum_top(a.min_idx, &a);
 }

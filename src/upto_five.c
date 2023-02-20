@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:37:13 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 13:47:01 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:58:29 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,25 @@ int	five_sort(t_queue *a, t_queue *b)
 	return (1);
 }
 
+int	check_sorted(t_queue *a)
+{
+	int	i;
+	int	*items;
+
+	i = -1;
+	items = a->items;
+	while (i++ < a->size - 2)
+	{
+		if (items[i] > items[i + 1])
+			return (0);
+	}
+	return (1);
+}
+
 int	upto_five(t_queue *a, t_queue *b)
 {
+	if (check_sorted(a))
+		return (1);
 	if (a->size > 5)
 		return (0);
 	else if (a->size == 2)

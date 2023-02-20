@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:24 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 14:17:29 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:23:30 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,56 +23,46 @@ int	find_leader(int i, int size, int group, int *big)
 	return (0);
 }
 
-int	*alloc_index(int *array, int size, int i, int *max_group)
+int	alloc_index(int *array, int size, int i, int *big)
 {
 	int	group;
-	int	*big;
+	int	max_group;
 
-	big = (int *)malloc(sizeof(int) * size);
-	if (!big)
-		return (0);
 	big[size - 1] = 1;
+	max_group = 1;
 	while (i--)
 	{
-		group = *max_group + 1;
+		group = max_group + 1;
 		while (--group)
 		{
 			if (array[i] < array[find_leader(i, size, group, big)])
 			{
 				big[i] = group + 1;
-				if (big[i] > *max_group)
-					*max_group = big[i];
+				if (big[i] > max_group)
+					max_group = big[i];
 				break ;
 			}
 		}
 		if (group == 0)
 			big[i] = 1;
 	}
-	return (big);
+	return (max_group);
 }
 
-int	*biggest(t_queue	*a)
+void	biggest(t_queue	*a, int *big)
 {
-	int	*array;
-	int	*big;
-	int	size;
 	int	i;
 	int	max_group;
 
-	max_group = 1;
-	array = a->items;
-	size = a->size;
-	big = alloc_index(array, size, size - 1, &max_group);
-	if (!big)
-		return (0);
-	a->min_idx = find_leader(0, size, max_group, big);
+	max_group = alloc_index(a->items, a->size, a->size - 1, big);
+	a->min_idx = find_leader(0, a->size, max_group, big);
 	i = -1;
-	while (i++ < size)
+	while (i++ < a->size)
 	{
 		if (big[i] != max_group)
 			big[i] = 0;
 		else
 			max_group--;
 	}
-	return (big);
+	return ;
 }

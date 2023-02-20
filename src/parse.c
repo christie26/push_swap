@@ -6,49 +6,30 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:41 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 14:24:19 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:16:33 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_over(int num, t_list **lst_ptr)
+int	error_message(t_list *head, int *a, int *b)
 {
-	t_list	*curr;
-	t_list	*newlist;
-	int		*ptr;
-	int		*content;
-
-	ptr = (int *)malloc(sizeof(int));
-	*ptr = num;
-	if (!(*lst_ptr))
-	{
-		*lst_ptr = ft_lstnew((void *)ptr);
-		return (0);
-	}
-	curr = *lst_ptr;
-	while (curr)
-	{
-		content = curr->content;
-		if (*content == num)
-			return (1);
-		else
-			curr = curr->next;
-	}
-	newlist = ft_lstnew((void *)ptr);
-	ft_lstadd_back(lst_ptr, newlist);
-	return (0);
+	// head free
+	if (a)
+		free(a);
+	if (b)
+		free(b);
+	write(2, "Error\n", 6);
+	return (1);
 }
 
-int	*parse_av(int ac, char **av, int size)
+int	parse_av(int ac, char **av, int *items)
 {
-	int		*items;
-	char	**tab;
 	int		i;
 	int		cnt;
+	char	**tab;
 	t_list	*head;
 
-	items = (int *)malloc(sizeof(int) * size);
 	head = NULL;
 	i = 0;
 	while (++i < ac)
@@ -59,14 +40,15 @@ int	*parse_av(int ac, char **av, int size)
 		{
 			*items = ft_atoi(*tab);
 			if (check_over(*items, &head) || check_int(*tab))
-				exit (1);
+				return (error_message(head, items, 0));
 			items++;
 			tab++;
 			cnt++;
 		}
 		free(tab - cnt);
 	}
-	return (items - size);
+	// free head 
+	return (0);
 }
 
 int	get_size(int ac, char **av)
@@ -93,36 +75,31 @@ int	get_size(int ac, char **av)
 	return (cnt);
 }
 
-t_queue	*get_queue(int ac, char **av)
+int	get_queue(int ac, char **av, t_queue *a)
 {
-	int		size;
-	int		*items;
-	t_queue	*a;
+	int	size;
+	int	*items;
 
 	size = get_size(ac, av);
-	items = parse_av(ac, av, size);
-	a = ft_calloc(1, sizeof(t_queue));
-	if (!a)
-		return (0);
+	items = (int *)malloc(sizeof(int) * size);
+	if (!items)
+		return (1);
+	if (parse_av(ac, av, items))
+		return (1);
+	a->items = items;
 	a->size = size;
 	a->front = 0;
 	a->rear = size - 1;
-	a->items = items;
-	return (a);
+	return (0);
 }
 
-t_queue	*init_b(int size)
+int	init_b(int size, t_queue *b)
 {
-	int		*array;
-	t_queue	*b;
-
-	array = (int *)malloc(sizeof(int) * size);
-	b = ft_calloc(sizeof(t_queue), 1);
-	if (!b)
-		return (0);
-	b->items = array;
+	b->items = (int *)malloc(sizeof(int) * size);
+	if (!b->items)
+		return (1);
 	b->front = -1;
 	b->rear = -1;
 	b->size = size;
-	return (b);
+	return (0);
 }

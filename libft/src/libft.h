@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:41:55 by yoonsele          #+#    #+#             */
-/*   Updated: 2022/11/20 18:53:31 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:23:10 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_list
 {
-	void			*content;
+	int				content;
 	struct s_list	*next;
 }	t_list;
 
@@ -58,7 +58,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_list	*ft_lstnew(void *content);
+t_list	*ft_lstnew(void	*content);
 void	ft_lstadd_front(t_list **lst, t_list *node);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);

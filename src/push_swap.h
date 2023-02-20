@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 14:19:08 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:07:51 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "../libft/src/libft.h"
 
 # define EXIT_FAILURE 1
-# define SORTED_INPUT 1
 # define FRONT 1
 # define REAR 2
 
@@ -55,16 +54,19 @@ void	rrb(t_queue *queue);
 void	rrr(t_queue *a, t_queue *b);
 int		de_queue(t_queue *queue);
 void	en_queue(t_queue *queue, int element);
-int		*parse_av(int ac, char **av, int size);
+
+int		get_queue(int ac, char **av, t_queue *a);
+int		parse_av(int ac, char **av, int *items);
+int		init_b(int size, t_queue *b);
+
 int		check_int(char *str);
 int		check_over(int num, t_list **lst_ptr);
-t_queue	*get_queue(int ac, char **av);
-t_queue	*init_b(int size);
 int		upto_five(t_queue *a, t_queue *b);
-void	print_queue(t_queue a, t_queue b);
-int		*biggest(t_queue *a);
+void	biggest(t_queue *a, int *big);
+
 int		get_pivot(t_queue *a);
 void	quick_sort(int *array, int start, int end);
+
 int		oversize(int value, int size);
 void	back_to_a(t_queue *a, t_queue*b);
 t_data	*set_cur_data(t_queue *a, t_queue *b, int idx_b, t_data *cur);
@@ -72,5 +74,7 @@ void	run_command(t_queue *a, t_queue *b, t_data *min);
 void	update_a(t_queue *a);
 int		find_a_index(t_queue *a, int element_b);
 void	minimum_top(int idx_a, t_queue *a);
+
+void	print_queue(t_queue a, t_queue b);
 
 #endif

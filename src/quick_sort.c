@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 22:36:17 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 14:21:46 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:27:13 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	get_pivot(t_queue *a)
 	int	pivot;
 
 	idx = -1;
+	// check this part !!
 	array = (int *)malloc(sizeof(int) * a->size);
 	if (!array)
 		exit (1);
@@ -77,5 +78,6 @@ int	get_pivot(t_queue *a)
 		array[idx] = a->items[idx];
 	quick_sort(array, 0, a->size - 1);
 	pivot = array[a->size / 2];
+	free(array);
 	return (pivot);
 }
