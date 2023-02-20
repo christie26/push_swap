@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:41 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 10:36:55 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:24:19 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ t_queue	*get_queue(int ac, char **av)
 	size = get_size(ac, av);
 	items = parse_av(ac, av, size);
 	a = ft_calloc(1, sizeof(t_queue));
+	if (!a)
+		return (0);
 	a->size = size;
 	a->front = 0;
 	a->rear = size - 1;
@@ -116,6 +118,8 @@ t_queue	*init_b(int size)
 
 	array = (int *)malloc(sizeof(int) * size);
 	b = ft_calloc(sizeof(t_queue), 1);
+	if (!b)
+		return (0);
 	b->items = array;
 	b->front = -1;
 	b->rear = -1;

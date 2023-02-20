@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 13:23:00 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:19:08 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int		*biggest(t_queue *a);
 int		get_pivot(t_queue *a);
 void	quick_sort(int *array, int start, int end);
 int		oversize(int value, int size);
-void	move_to_b(t_queue *a, t_queue *b, int *big, int pivot);
 void	back_to_a(t_queue *a, t_queue*b);
 t_data	*set_cur_data(t_queue *a, t_queue *b, int idx_b, t_data *cur);
 void	run_command(t_queue *a, t_queue *b, t_data *min);

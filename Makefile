@@ -12,7 +12,6 @@ SRC			= 	main.c \
 				quick_sort.c \
 				biggest.c \
 				utils.c \
-				move_to_b.c \
 				back_to_a.c 
 
 SRC			:= $(addprefix $(SRCDIR)/, $(SRC))

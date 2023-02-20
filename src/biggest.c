@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:24 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/18 22:46:10 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:17:29 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ int	find_leader(int i, int size, int group, int *big)
 
 int	*alloc_index(int *array, int size, int i, int *max_group)
 {
-	int	j;
 	int	group;
 	int	*big;
 
 	big = (int *)malloc(sizeof(int) * size);
+	if (!big)
+		return (0);
 	big[size - 1] = 1;
 	while (i--)
 	{
 		group = *max_group + 1;
 		while (--group)
 		{
-			j = find_leader(i, size, group, big);
-			if (array[i] < array[j])
+			if (array[i] < array[find_leader(i, size, group, big)])
 			{
 				big[i] = group + 1;
 				if (big[i] > *max_group)
@@ -49,21 +49,6 @@ int	*alloc_index(int *array, int size, int i, int *max_group)
 			big[i] = 1;
 	}
 	return (big);
-}
-
-int	minimum_value_index(int *big, int max_group, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (big[i] == max_group)
-			return (i);
-		i++;
-	}
-	printf("Error ! wrong with biggest\n");
-	return (-1);
 }
 
 int	*biggest(t_queue	*a)
@@ -78,7 +63,9 @@ int	*biggest(t_queue	*a)
 	array = a->items;
 	size = a->size;
 	big = alloc_index(array, size, size - 1, &max_group);
-	a->min_idx = minimum_value_index(big, max_group, size);
+	if (!big)
+		return (0);
+	a->min_idx = find_leader(0, size, max_group, big);
 	i = -1;
 	while (i++ < size)
 	{
