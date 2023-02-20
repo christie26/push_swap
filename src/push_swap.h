@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 16:07:51 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:18:40 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define EXIT_FAILURE 1
 # define FRONT 1
 # define REAR 2
+
+typedef struct s_pslst {
+	int				content;
+	struct s_pslst	*next;
+}	t_pslst;
 
 typedef struct s_data {
 	int	ra;
@@ -42,6 +47,10 @@ typedef struct s_queue {
 	int	*items;
 }	t_queue;
 
+t_pslst	*ps_lstnew(int content);
+void	ps_lstadd_back(t_pslst **lst, t_pslst *node);
+void	ps_lstclear(t_pslst **lst);
+
 void	sa(t_queue *queue);
 void	sb(t_queue *queue);
 void	pa(t_queue *a, t_queue *b);
@@ -56,11 +65,11 @@ int		de_queue(t_queue *queue);
 void	en_queue(t_queue *queue, int element);
 
 int		get_queue(int ac, char **av, t_queue *a);
-int		parse_av(int ac, char **av, int *items);
+int		parse_av(int ac, char **av, int *items, t_pslst *head);
 int		init_b(int size, t_queue *b);
 
 int		check_int(char *str);
-int		check_over(int num, t_list **lst_ptr);
+int		check_over(int num, t_pslst **lst_ptr);
 int		upto_five(t_queue *a, t_queue *b);
 void	biggest(t_queue *a, int *big);
 

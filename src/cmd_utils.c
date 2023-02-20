@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:38 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 13:47:18 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:20:55 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	de_queue(t_queue *queue)
 		queue->front = (queue->front + 1) % queue->size;
 	return (element);
 }
-
+/*
 void	print_queue(t_queue a, t_queue b)
 {
 	int		i;
@@ -71,3 +71,4 @@ void	print_queue(t_queue a, t_queue b)
 	printf(" i    a|    b  |\n");
 	printf("----------------\n");
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:41:55 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 16:23:10 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:40:53 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_list
 {
-	int				content;
+	void			*content;
 	struct s_list	*next;
 }	t_list;
 

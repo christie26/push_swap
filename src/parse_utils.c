@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:44 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 16:07:13 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:00:11 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,25 @@ int	check_int(char *str)
 	return (0);
 }
 
-int	check_over(int num, t_list **lst_ptr)
+int	check_over(int num, t_pslst **lst_ptr)
 {
-	t_list	*curr;
-	t_list	*newlist;
-	int		*ptr;
-	int		*content;
+	t_pslst	*curr;
+	t_pslst	*newlist;
 
-	ptr = (int *)malloc(sizeof(int));
-	*ptr = num;
 	if (!(*lst_ptr))
 	{
-		*lst_ptr = ft_lstnew((void *)ptr);
+		*lst_ptr = ps_lstnew(num);
 		return (0);
 	}
 	curr = *lst_ptr;
 	while (curr)
 	{
-		content = curr->content;
-		if (*content == num)
+		if (curr->content == num)
 			return (1);
 		else
 			curr = curr->next;
 	}
-	newlist = ft_lstnew((void *)ptr);
-	ft_lstadd_back(lst_ptr, newlist);
+	newlist = ps_lstnew(num);
+	ps_lstadd_back(lst_ptr, newlist);
 	return (0);
 }

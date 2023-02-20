@@ -3,6 +3,8 @@ SRCDIR		= ./src
 SRC			= 	main.c \
 				parse.c \
 				parse_utils.c \
+				lst_utils.c \
+				utils.c \
 				upto_five.c \
 				cmd_push.c \
 				cmd_swap.c \
@@ -11,7 +13,6 @@ SRC			= 	main.c \
 				cmd_utils.c \
 				quick_sort.c \
 				biggest.c \
-				utils.c \
 				back_to_a.c 
 
 SRC			:= $(addprefix $(SRCDIR)/, $(SRC))
