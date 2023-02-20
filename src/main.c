@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 11:31:46 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:25:00 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	main(int ac, char **av)
 	if (check_sorted(a))
 		exit (SORTED_INPUT);
 	b = init_b(a->size);
+	if (upto_five(a, b))
+		return (0);
 	big = biggest(a);
 	pivot = get_pivot(a);
 	move_to_b(a, b, big, pivot);

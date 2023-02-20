@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:50 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 11:33:37 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:30:04 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,8 @@ void	rrotate(t_queue *queue)
 	int	tmp;
 
 	tmp = queue->items[queue->rear];
-	if (queue->rear == 0)
-		queue->rear = queue->size - 1;
-	else
-		queue->rear = (queue->rear - 1) % queue->size;
-	if (queue->front == 0)
-		queue->front = queue->size - 1;
-	else
-		queue->front = (queue->front - 1) % queue->size;
+	queue->rear = oversize(queue->rear - 1, queue->size);
+	queue->front = oversize(queue->front - 1, queue->size);
 	queue->items[queue->front] = tmp;
 }
 

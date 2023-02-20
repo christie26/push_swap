@@ -6,33 +6,11 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:42:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 11:31:33 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:43:53 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	find_a_index(t_queue *a, int element_b)
-{
-	int	i;
-	int	element;
-
-	element = element_b + 1;
-	while (element < a->items[a->max_idx] + 1)
-	{
-		i = a->front;
-		while (1)
-		{
-			if (a->items[i] == element)
-				return (i);
-			if (i == a->rear)
-				break ;
-			i = (i + 1) % a->size;
-		}
-		element++;
-	}
-	return (a->min_idx);
-}
 
 void	set_rr_rrr(int *a, int *b, int *r)
 {
@@ -73,6 +51,25 @@ t_data	*set_cur_data(t_queue *a, t_queue *b, int idx_b, t_data *cur)
 		set_rr_rrr(&cur->rra, &cur->rrb, &cur->rrr);
 	cur->total = cur->ra + cur->rb + cur->rr + cur->rra + cur->rrb + cur->rrr;
 	return (cur);
+}
+
+void	run_command(t_queue *a, t_queue *b, t_data *min)
+{
+	while (min->ra--)
+		ra(a);
+	while (min->rb--)
+		rb(b);
+	while (min->rr--)
+		rr(a, b);
+	while (min->rra--)
+		rra(a);
+	while (min->rrb--)
+		rrb(b);
+	while (min->rrr--)
+		rrr(a, b);
+	pa(a, b);
+	update_a(a);
+	return ;
 }
 
 void	back_to_a(t_queue *a, t_queue *b)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_center.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:29:01 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 11:31:30 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:40:28 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,26 @@ void	update_a(t_queue *a)
 	return ;
 }
 
-void	run_command(t_queue *a, t_queue *b, t_data *min)
+int	find_a_index(t_queue *a, int element_b)
 {
-	while (min->ra--)
-		ra(a);
-	while (min->rb--)
-		rb(b);
-	while (min->rr--)
-		rr(a, b);
-	while (min->rra--)
-		rra(a);
-	while (min->rrb--)
-		rrb(b);
-	while (min->rrr--)
-		rrr(a, b);
-	pa(a, b);
-	update_a(a);
-	return ;
+	int	i;
+	int	element;
+
+	element = element_b + 1;
+	while (element < a->items[a->max_idx] + 1)
+	{
+		i = a->front;
+		while (1)
+		{
+			if (a->items[i] == element)
+				return (i);
+			if (i == a->rear)
+				break ;
+			i = (i + 1) % a->size;
+		}
+		element++;
+	}
+	return (a->min_idx);
 }
 
 void	minimum_top(int idx_a, t_queue *a)

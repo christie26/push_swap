@@ -3,6 +3,7 @@ SRCDIR		= ./src
 SRC			= 	main.c \
 				parse.c \
 				parse_utils.c \
+				upto_five.c \
 				cmd_push.c \
 				cmd_swap.c \
 				cmd_rotate.c \
@@ -10,7 +11,7 @@ SRC			= 	main.c \
 				cmd_utils.c \
 				quick_sort.c \
 				biggest.c \
-				rotate_center.c \
+				utils.c \
 				move_to_b.c \
 				back_to_a.c 
 
