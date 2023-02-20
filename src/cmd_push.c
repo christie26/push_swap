@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:47 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 12:27:27 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:18:46 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	push(t_queue *src, t_queue *dst)
 {
 	int	element;
 
+	if (src->front == -1)
+		return ;
 	element = de_queue(src);
 	en_queue(dst, element);
 }

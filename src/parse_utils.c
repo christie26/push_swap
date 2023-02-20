@@ -6,12 +6,11 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:44 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 17:00:11 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:20:27 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "../libft/src/libft.h"
 
 static int	is_space(char c)
 {
