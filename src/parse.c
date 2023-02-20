@@ -6,26 +6,11 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:41 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/16 15:05:52 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:36:55 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
-void print_llist(t_list *head)
-{
-	t_list *cur;
-
-	cur = head;
-	while (cur)
-	{
-		printf("(%d) -> ", *((int*)cur->content));
-		cur = cur->next;
-	}
-	printf("NULL\n");
-}
-*/
 
 int	check_over(int num, t_list **lst_ptr)
 {
@@ -34,7 +19,6 @@ int	check_over(int num, t_list **lst_ptr)
 	int		*ptr;
 	int		*content;
 
-//	print_llist(*lst_ptr);
 	ptr = (int *)malloc(sizeof(int));
 	*ptr = num;
 	if (!(*lst_ptr))

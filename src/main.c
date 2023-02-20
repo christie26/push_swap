@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/19 23:24:49 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:28:21 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,4 @@ int	main(int ac, char **av)
 	move_to_b(a, b, big, pivot);
 	back_to_a(a, b);
 	rotate_center(a->min_idx, a, 1);
-	print_queue(*a, *b);
 }

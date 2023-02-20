@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/19 23:23:48 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:32:17 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 # define FRONT 1
 # define REAR 2
 
+typedef struct s_data {
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+	int	total;
+}	t_data;
+
 typedef struct s_queue {
 	int	size;
 	int	front;
@@ -39,20 +49,24 @@ void	pa(t_queue *a, t_queue *b);
 void	pb(t_queue *a, t_queue *b);
 void	ra(t_queue *queue);
 void	rb(t_queue *queue);
+void	rr(t_queue *a, t_queue *b);
 void	rra(t_queue *queue);
 void	rrb(t_queue *queue);
+void	rrr(t_queue *a, t_queue *b);
 int		de_queue(t_queue *queue);
 void	en_queue(t_queue *queue, int element, int flag);
+int		*parse_av(int ac, char **av, int size);
+int		check_int(char *str);
+int		check_over(int num, t_list **lst_ptr);
 t_queue	*get_queue(int ac, char **av);
 t_queue	*init_b(int size);
 void	print_queue(t_queue a, t_queue b);
 int		*biggest(t_queue *a);
 int		*get_pivot(t_queue *a);
-int		*parse_av(int ac, char **av, int size);
-int		check_int(char *str);
-int		check_over(int num, t_list **lst_ptr);
+int		oversize(int value, int size);
 void	move_to_b(t_queue *a, t_queue *b, int *big, int *pivot);
 void	back_to_a(t_queue *a, t_queue*b);
 void	rotate_center(int idx, t_queue *queue, int flag);
+void	rr_rrr(t_queue *a, t_queue *b, t_data *min);
 
 #endif

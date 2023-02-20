@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 22:36:17 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/19 23:23:19 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:52:10 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,33 @@ void	array_swap(int *a, int *b)
 	return ;
 }
 
-void	array_print(int *array)
-{
-	printf("array is \n");
-	for (int i = 0; i < 9; i++)
-		printf("[%d] = %d\n", i, array[i]);
-}
-
 void	quick_sort(int *array, int start, int end)
 {
-	int i;
-	int j;
-	int mid;
+	int	i;
+	int	j;
+	int	mid;
 	int	pivot;
 
-//	printf("%d - %d\n", start, end);
 	i = start + 1;
 	j = end;
 	mid = start + (end - start) / 2;
-//	array_print(array);
-//	printf("%d, %d, %d\n", start, mid, end);
-	if (array[start] > array[mid])
-		array_swap(array + start, array + mid);
-//	printf("%d, %d, %d\n", array[start], array[mid], array[end]);
-	if (array[start] > array[end])
-		array_swap(array + start, array + end);
-//	printf("%d, %d, %d\n", array[start], array[mid], array[end]);
+# if 1
 	if (array[mid] > array[end])
 		array_swap(array + mid, array + end);
-//	printf("%d, %d, %d\n", array[start], array[mid], array[end]);
+	if (array[mid] > array[start])
+		array_swap(array + mid, array + start);
+	if (array[end] < array[start])
+		array_swap(array + end, array + start);
+# else
+	if (array[start] > array[mid])
+		array_swap(array + start, array + mid);
+	if (array[start] > array[end])
+		array_swap(array + start, array + end);
+	if (array[mid] > array[end])
+		array_swap(array + mid, array + end);
 	array_swap(array + start, array + mid);
+# endif
 	pivot = array[start];
-//	printf("pivot = %d\n", pivot);
 	while (i < j)
 	{
 		while (pivot > array[i])
@@ -67,13 +62,10 @@ void	quick_sort(int *array, int start, int end)
 		}
 		array_swap(array + i, array + j);
 	}
-//	array_print(array);
-	if (start + 1 < end)
-	{
-		quick_sort(array, start, j);
-		quick_sort(array, j + 1, end);
-	}
-	return ;
+	if (start + 1 >= end)
+		return ;
+	quick_sort(array, start, j);
+	quick_sort(array, j + 1, end);
 }
 
 int	*get_pivot(t_queue *a)
@@ -93,6 +85,5 @@ int	*get_pivot(t_queue *a)
 	quick_sort(array, 0, a->size - 1);
 	pivot[0] = array[a->size / 3];
 	pivot[1] = array[a->size / 3 * 2];
-//	array_print(array);
 	return (pivot);
 }

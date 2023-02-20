@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:38 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/17 15:50:32 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:36:07 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	en_queue(t_queue *queue, int element, int flag)
 {
 	if ((queue->front == queue->rear + 1) || \
 		(queue->front == 0 && queue->rear == queue->size - 1))
-	{
-		write(1, &"Error: full\n", 12);
 		return ;
-	}
 	if (queue->front == -1)
 	{
 		queue->front = 0;
@@ -55,7 +52,6 @@ int	de_queue(t_queue *queue)
 	}
 	else
 		queue->front = (queue->front + 1) % queue->size;
-//	printf("Delete -> %d\n", element);
 	return (element);
 }
 

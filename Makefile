@@ -10,6 +10,7 @@ SRC			= 	main.c \
 				cmd_utils.c \
 				quick_sort.c \
 				biggest.c \
+				rotate_center.c \
 				move_to_b.c \
 				back_to_a.c 
 

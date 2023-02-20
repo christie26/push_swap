@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:35 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/19 23:27:14 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:36:37 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	move_to_b(t_queue *a, t_queue *b, int *big, int *pivot)
 		{
 			if (a->items[i] < two)
 				pb(a, b);
-			else if (a->items[i] > two)
+			else
 			{
 				pb(a, b);
 				rb(b);
 			}
-			else
-				ra(a);
 		}
 	i++;
 	}
