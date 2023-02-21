@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:57:14 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 17:18:40 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:59:37 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		de_queue(t_queue *queue);
 void	en_queue(t_queue *queue, int element);
 
 int		get_queue(int ac, char **av, t_queue *a);
-int		parse_av(int ac, char **av, int *items, t_pslst *head);
+int		parse_av(int ac, char **av, int *items, t_pslst **head);
 int		init_b(int size, t_queue *b);
 
 int		check_int(char *str);
@@ -76,6 +76,7 @@ void	biggest(t_queue *a, int *big);
 int		get_pivot(t_queue *a);
 void	quick_sort(int *array, int start, int end);
 
+void	ft_free(char **tab);
 int		oversize(int value, int size);
 void	back_to_a(t_queue *a, t_queue*b);
 t_data	*set_cur_data(t_queue *a, t_queue *b, int idx_b, t_data *cur);

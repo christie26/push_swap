@@ -6,11 +6,24 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:29:01 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 13:40:28 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:59:39 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_free(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
 int	oversize(int value, int size)
 {

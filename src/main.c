@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:28 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 16:50:01 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:56:43 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,6 @@ int	main(int ac, char **av)
 	move_to_b(&a, &b, big, pivot);
 	back_to_a(&a, &b);
 	minimum_top(a.min_idx, &a);
+	free(a.items);
+	free(b.items);
 }

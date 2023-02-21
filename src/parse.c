@@ -6,7 +6,7 @@
 /*   By: yoonsele <yoonsele@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:43:41 by yoonsele          #+#    #+#             */
-/*   Updated: 2023/02/20 17:18:04 by yoonsele         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:00:24 by yoonsele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,6 @@ int	error_message(t_pslst *head, int *items)
 		free(items);
 	write(2, "Error\n", 6);
 	return (1);
-}
-
-int	parse_av(int ac, char **av, int *items, t_pslst *head)
-{
-	int		i;
-	int		j;
-	char	**tab;
-	char	**tmp;
-
-	i = 0;
-	j = 0;
-	while (++i < ac)
-	{
-		tab = ft_split(av[i], ' ');
-		tmp = tab;
-		while (*tmp)
-		{
-			items[j] = ft_atoi(*tmp);
-			if (check_over(items[j], &head) || check_int(*tmp))
-				return (error_message(head, items));
-			j++;
-			tmp++;
-		}
-		free(tab);
-	}
-	return (0);
 }
 
 int	get_size(int ac, char **av)
@@ -72,6 +46,35 @@ int	get_size(int ac, char **av)
 	return (cnt);
 }
 
+int	parse_av(int ac, char **av, int *items, t_pslst **head)
+{
+	int		i;
+	int		j;
+	char	**tab;
+	char	**tmp;
+
+	i = 0;
+	j = 0;
+	while (++i < ac)
+	{
+		tab = ft_split(av[i], ' ');
+		tmp = tab;
+		while (*tmp)
+		{
+			items[j] = ft_atoi(*tmp);
+			if (check_over(items[j], head) || check_int(*tmp))
+			{
+				ft_free(tab);
+				return (error_message(*head, items));
+			}
+			j++;
+			tmp++;
+		}
+		ft_free(tab);
+	}
+	return (0);
+}
+
 int	get_queue(int ac, char **av, t_queue *a)
 {
 	int		size;
@@ -83,7 +86,7 @@ int	get_queue(int ac, char **av, t_queue *a)
 	items = (int *)malloc(sizeof(int) * size);
 	if (!items)
 		return (1);
-	if (parse_av(ac, av, items, head))
+	if (parse_av(ac, av, items, &head))
 		return (1);
 	if (head)
 		ps_lstclear(&head);
